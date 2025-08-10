@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Blogpost from "../../components/Blogpost.astro";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+  const allTags = new Set<string>();
+
+  allPosts.forEach((post) => {
+    if (post.data.tags) {
+      post.data.tags.forEach((tag: string) => allTags.add(tag));
+    }
+  });
+
+  const tagsArray = Array.from(allTags);
+  return tagsArray.map((tag: string) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags?.includes(tag),
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={`Posts tagged with "${tag}"`}>
+  <div style="margin-bottom: 2rem;">
+    <a
+      href="/blog"
+      style="
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #666;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      "
+    >
+      ← Back to Blog
+    </a>
+  </div>
+  <h1>Posts tagged with "{tag}"</h1>
+  {
+    posts && posts.length > 0 ? (
+      <ul>
+        {posts.map((post) => (
+          <Blogpost url={`/posts/${post.id}/`} title={post.data.title} />
+        ))}
+      </ul>
+    ) : (
+      <p>No posts found with this tag.</p>
+    )
+  }
+</BaseLayout>

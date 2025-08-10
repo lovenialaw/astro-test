@@ -1,21 +1,329 @@
 html {
     background-color: #f1f5f9;
     font-family: sans-serif;
-  }
-  
-  body {
+}
+
+body {
     margin: 0 auto;
     width: 100%;
     max-width: 80ch;
     padding: 1rem;
     line-height: 1.5;
-  }
-  
-  * {
+}
+
+* {
     box-sizing: border-box;
-  }
-  
-  h1 {
+}
+
+h1 {
     margin: 1rem 0;
     font-size: 2.5rem;
-  }
+}
+
+/* nav styles */
+header {
+    width: 100%;
+    padding: 1rem 0;
+}
+
+header nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hamburger {
+    padding: 10px;
+    cursor: pointer;
+    display: none;
+}
+
+.hamburger .line {
+    display: block;
+    width: 40px;
+    height: 5px;
+    margin-bottom: 10px;
+    background-color: #ff9776;
+}
+
+.nav-links {
+    width: 100%;
+    top: 5rem;
+    left: 48px;
+    background-color: #ff9776;
+    display: none;
+    margin: 0;
+    position: absolute;
+    z-index: 1000;
+}
+
+.nav-links a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    background-color: #ff9776;
+}
+
+.expanded {
+    display: unset;
+}
+
+@media screen and (min-width: 636px) {
+    .hamburger {
+        display: none;
+    }
+
+    .nav-links {
+        margin-left: 5em;
+        display: block !important;
+        position: static;
+        width: auto;
+        background: none;
+    }
+
+    .nav-links a {
+        display: inline-block;
+        padding: 15px 20px;
+    }
+}
+
+.hamburger {
+    display: none;
+}
+
+@media screen and (max-width: 635px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links.expanded {
+        display: block;
+    }
+}
+
+html.dark {
+    background-color: #0d0950;
+    color: #fff;
+}
+
+.dark .nav-links a {
+    color: #fff;
+}
+
+/* Greeting component styles */
+.greeting-container {
+    text-align: center;
+    padding: 1rem;
+    margin: 1rem 0;
+    background: #f0f8ff;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.greeting-title {
+    color: #007acc;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.greeting-message {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.greeting-button {
+    padding: 0.5rem 1rem;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.greeting-button:hover {
+    background: #005a9e;
+}
+
+/* Dark mode overrides for Greeting component */
+html.dark .greeting-container {
+    background: #1a1a2e;
+    border: 1px solid #2d2d44;
+}
+
+html.dark .greeting-title {
+    color: #64b5f6;
+}
+
+html.dark .greeting-message {
+    color: #e3f2fd;
+}
+
+html.dark .greeting-button {
+    background: #64b5f6;
+    color: #0d0950;
+}
+
+html.dark .greeting-button:hover {
+    background: #42a5f5;
+}
+
+/* Blog page dark mode styles */
+html.dark .blog-description {
+    color: #e3f2fd;
+}
+
+html.dark .tag-navigation {
+    background: #1a1a2e !important;
+    border: 1px solid #2d2d44;
+}
+
+html.dark .tag-navigation h3 {
+    color: #64b5f6;
+}
+
+html.dark .tag-button {
+    background: #64b5f6 !important;
+    color: #0d0950 !important;
+}
+
+html.dark .tag-button:hover {
+    background: #42a5f5 !important;
+}
+
+html.dark .blog-posts h2 {
+    color: #64b5f6;
+}
+
+html.dark .blog-posts a {
+    color: #81c784;
+}
+
+html.dark .blog-posts a:hover {
+    color: #a5d6a7;
+}
+
+html.dark .post-tags a {
+    color: #90caf9 !important;
+}
+
+html.dark .post-tags a:hover {
+    color: #64b5f6 !important;
+}
+
+/* Blog page base styles */
+.blog-description {
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.tag-navigation {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.tag-navigation h3 {
+    margin-top: 0;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.tag-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.tag-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #007acc;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.tag-button:hover {
+    background: #005a9e;
+}
+
+.blog-posts h2 {
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.blog-posts a {
+    color: #007acc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-posts a:hover {
+    color: #005a9e;
+}
+
+.post-tags {
+    margin-top: 0.5rem;
+}
+
+.tag-link {
+    margin-right: 0.5rem;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.tag-link:hover {
+    color: #333;
+}
+
+/* Ensure blog post text has proper colors */
+.blog-posts li {
+    color: inherit;
+    margin-bottom: 1rem;
+}
+
+.blog-posts li a {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.blog-posts li a:hover {
+    color: #333333;
+}
+
+/* Dark mode text color overrides */
+html.dark .blog-posts li {
+    color: #e3f2fd;
+}
+
+html.dark .blog-posts li a {
+    color: #81c784;
+}
+
+html.dark .blog-posts li a:hover {
+    color: #a5d6a7;
+}
